@@ -9,4 +9,5 @@ public class TaskDTO {
     private String description;
     private String parent;
     private String uuid;
+    private String user;
 }

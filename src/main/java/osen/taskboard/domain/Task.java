@@ -15,12 +15,24 @@ public class Task {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "parent")
+    private Task parent;
+
+    @Column(name = "uuid")
+    private String uuid;
+
+    @Column(name = "user")
+    private User user;
+
     public Task() {
     }
 
-    public Task(String header, String description) {
+    public Task(String header, String description, Task parent, String uuid, User user) {
         this.header = header;
         this.description = description;
+        this.parent = parent;
+        this.uuid = uuid;
+        this.user = user;
     }
 
     public Long getId() {
@@ -45,5 +57,29 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Task getParent() {
+        return parent;
+    }
+
+    public void setParent(Task parent) {
+        this.parent = parent;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

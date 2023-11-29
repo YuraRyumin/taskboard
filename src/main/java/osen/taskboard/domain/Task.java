@@ -15,13 +15,15 @@ public class Task {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "parent")
+    @OneToOne
+    @JoinColumn(name = "parent")
     private Task parent;
 
     @Column(name = "uuid")
     private String uuid;
 
-    @Column(name = "user")
+    @OneToOne
+    @JoinColumn(name = "user")
     private User user;
 
     public Task() {

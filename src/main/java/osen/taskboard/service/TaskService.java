@@ -41,14 +41,26 @@ public class TaskService {
         taskDTO.setHeader(taskDTO.getHeader());
         taskDTO.setDescription(task.getDescription());
         taskDTO.setUuid(taskDTO.getUuid());
-        taskDTO.setParent(task.getParent().getUuid());
-        taskDTO.setUser(task.getUser().getUuid());
+        if(task.getParent() != null) {
+            taskDTO.setParent(task.getParent().getUuid());
+        }
+        if(task.getUser() != null) {
+            taskDTO.setUser(task.getUser().getUuid());
+        }
         return taskDTO;
     }
 
     public Iterable<TaskDTO> convertAllEntitysToDTO(Iterable<Task> tasks){
         return StreamSupport.stream(tasks.spliterator(), false).
                 map(this::convertEntityToDTO).collect(Collectors.toList());
+    }
+
+    public Iterable<TaskDTO> getAllTasks(){
+        return convertAllEntitysToDTO(taskRepo.findAll());
+    }
+
+    public Iterable<TaskDTO> getAllTasksByUser(String userUuid){
+        return convertAllEntitysToDTO(taskRepo.findAllByUserUuid(userUuid));
     }
 
     @Transactional

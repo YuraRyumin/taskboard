@@ -24,7 +24,7 @@ public class User implements UserDetails {
     private String phone;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_role")
+    @JoinColumn(name = "role")
     private Role role;
 
     @Column(name = "login")

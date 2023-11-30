@@ -26,15 +26,19 @@ public class Task {
     @JoinColumn(name = "user")
     private User user;
 
+    @Column(name = "done")
+    private boolean done;
+
     public Task() {
     }
 
-    public Task(String header, String description, Task parent, String uuid, User user) {
+    public Task(String header, String description, Task parent, String uuid, User user, boolean done) {
         this.header = header;
         this.description = description;
         this.parent = parent;
         this.uuid = uuid;
         this.user = user;
+        this.done = done;
     }
 
     public Long getId() {
@@ -83,5 +87,13 @@ public class Task {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
     }
 }

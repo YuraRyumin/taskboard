@@ -32,6 +32,7 @@ public class TaskService {
         taskDTO.setUuid("");
         taskDTO.setParent("");
         taskDTO.setUser("");
+        taskDTO.setDone(false);
         return taskDTO;
     }
 
@@ -41,6 +42,7 @@ public class TaskService {
         taskDTO.setHeader(taskDTO.getHeader());
         taskDTO.setDescription(task.getDescription());
         taskDTO.setUuid(taskDTO.getUuid());
+        taskDTO.setDone(task.isDone());
         if(task.getParent() != null) {
             taskDTO.setParent(task.getParent().getUuid());
         }
@@ -66,22 +68,23 @@ public class TaskService {
     @Transactional
     public void saveTask(Task task){
         saveTask(task.getHeader(), task.getDescription(), task.getParent() == null ? "" : task.getParent().getUuid(),
-                task.getUuid(), task.getUser() == null ? "" : task.getUser().getUuid());
+                task.getUuid(), task.getUser() == null ? "" : task.getUser().getUuid(), task.isDone());
     }
 
     @Transactional
-    public void saveTask(String header, String description, Task parent, String uuid, User user){
-        saveTask(header, description, parent == null ? "" : parent.getUuid(), uuid, user == null ? "" : user.getUuid());
+    public void saveTask(String header, String description, Task parent, String uuid, User user, boolean done){
+        saveTask(header, description, parent == null ? "" : parent.getUuid(), uuid, user == null ? "" : user.getUuid(), done);
     }
 
     @Transactional
-    public void saveTask(String header, String description, String parentUuid, String uuid, String userUuid){
+    public void saveTask(String header, String description, String parentUuid, String uuid, String userUuid, boolean done){
         Task thisTask = taskRepo.findFirstByUuid(uuid);
         if(thisTask == null){
             thisTask = new Task();
         }
         thisTask.setHeader(header);
         thisTask.setDescription(description);
+        thisTask.setDone(done);
         if(uuid.isEmpty()){
             thisTask.setUuid(UUID.randomUUID().toString());
         } else {

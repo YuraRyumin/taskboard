@@ -10,4 +10,5 @@ public class TaskDTO {
     private String parent;
     private String uuid;
     private String user;
+    private boolean done;
 }

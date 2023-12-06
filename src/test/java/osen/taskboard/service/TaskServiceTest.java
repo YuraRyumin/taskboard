@@ -33,4 +33,9 @@ public class TaskServiceTest {
         Assertions.assertEquals(taskService.getEmptyDTO().getUser(), "");
         Assertions.assertFalse(taskService.getEmptyDTO().isDone());
     }
+
+    @Test
+    void GetAllEntitiesTest(){
+        Assertions.assertNotNull(taskService.getAllTasks());
+    }
 }
